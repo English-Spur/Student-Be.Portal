@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Spur · Student Benefits</title>
+
+<style>
+:root{
+  --green:#0b3b2a;
+  --green2:#1c6b4a;
+  --green3:#2a8b62;
+  --mint:#e2f0e9;
+  --mint2:#f2faf6;
+  --cream:#f7fdfa;
+  --text:#0e2a1f;
+  --muted:#5b7a6c;
+  --border:#d0e4d9;
+
+  --accent-search:#2a8b62;
+  --accent-batch:#059669;
+
+  --shadow-sm:0 2px 10px rgba(11,59,42,.04);
+  --shadow-md:0 12px 36px rgba(11,59,42,.08),0 4px 12px rgba(0,0,0,.02);
+  --radius-sm:10px;
+  --radius-md:16px;
+  --radius-lg:22px;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font-sans);
+  background:var(--cream);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+}
+button,input,select{font:inherit}
+button{cursor:pointer;border:none}
+
+.topbar{
+  background:linear-gradient(135deg,#0a2e20 0%,#134f36 80%,#1b6847 100%);
+  color:#fff;
+  padding:15px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  box-shadow:0 2px 24px rgba(0,0,0,.12);
+}
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{
+  width:48px;height:48px;object-fit:contain;
+  background:#fff;border-radius:14px;padding:6px;
+  box-shadow:0 4px 12px rgba(0,0,0,.18);
+}
+.brand h1{
+  font-size:20px;font-weight:800;letter-spacing:-.3px;
+  background:linear-gradient(to right,#fff,#d4f0e2);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.brand p{
+  font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;
+  color:#a8d5c0;margin-top:2px;font-weight:600;
+}
+.btn-outline{
+  background:#fff;border:1.5px solid rgba(255,255,255,.35);color:var(--green);
+  border-radius:var(--radius-sm);padding:9px 16px;font-weight:700;font-size:12.5px;
+}
+
+.container{max-width:1440px;margin:0 auto;padding:28px 5% 60px}
+
+.intro{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:16px;flex-wrap:wrap;margin-bottom:24px;
+}
+.intro h2{font-size:26px;font-weight:800;letter-spacing:-.5px;color:var(--green)}
+.intro p{color:var(--muted);font-size:13.5px;margin-top:4px;font-weight:500}
+.live-pill{
+  font-size:11.5px;font-weight:700;color:#065f46;
+  background:#d1fae5;padding:6px 14px;border-radius:30px;
+}
+
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:16px;margin-bottom:24px;
+}
+.stat{
+  background:#fff;border:1px solid var(--border);
+  padding:18px 20px;border-radius:var(--radius-md);
+  box-shadow:var(--shadow-sm);position:relative;overflow:hidden;
+}
+.stat::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;opacity:.85;
+}
+.stat:nth-child(1)::after{background:linear-gradient(to right,#0b3b2a,#1c6b4a)}
+.stat:nth-child(2)::after{background:linear-gradient(to right,#1c6b4a,#2a8b62)}
+.stat:nth-child(3)::after{background:linear-gradient(to right,#0891b2,#2a8b62)}
+.stat:nth-child(4)::after{background:linear-gradient(to right,#b45309,#d97706)}
+.stat small{
+  color:var(--muted);font-weight:600;font-size:11px;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.stat strong{
+  display:block;font-size:30px;font-weight:800;
+  margin-top:6px;letter-spacing:-1px;color:var(--green);
+}
+.stat span{font-size:11px;color:var(--muted);font-weight:500}
+
+.toolbar{
+  background:#fff;padding:16px 20px;border:1px solid var(--border);
+  border-radius:var(--radius-md);display:flex;gap:12px;flex-wrap:wrap;
+  margin-bottom:22px;align-items:center;box-shadow:var(--shadow-sm);
+  position:relative;
+}
+.toolbar::before{
+  content:'';position:absolute;left:0;top:16px;bottom:16px;width:3px;
+  background:linear-gradient(to bottom,var(--accent-search),var(--accent-batch));
+  border-radius:4px;
+}
+.toolbar input,.toolbar select{
+  flex:1;min-width:150px;
+  padding:10px 14px;border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);background:#fff;color:var(--text);
+  outline:none;font-size:13px;font-weight:500;
+}
+.toolbar input{max-width:380px}
+.toolbar input:focus{border-color:var(--accent-search);box-shadow:0 0 0 4px rgba(42,139,98,.1)}
+
+.section-head{
+  display:flex;justify-content:space-between;align-items:center;
+  margin:20px 0 16px;gap:10px;flex-wrap:wrap;
+}
+.section-head h3{font-size:17px;font-weight:700;color:var(--green)}
+#resultCount{font-size:12px;color:var(--muted);font-weight:600}
+
+.student-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+}
+.student-card{
+  background:#fff;border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:20px;
+  box-shadow:var(--shadow-sm);transition:.22s;
+  display:flex;flex-direction:column;min-width:0;
+  position:relative;overflow:hidden;
+}
+.student-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(to right,var(--green2),var(--green3));
+  opacity:0;transition:.2s;
+}
+.student-card:hover::before{opacity:1}
+.student-card:hover{
+  box-shadow:var(--shadow-md);transform:translateY(-3px);
+  border-color:#b8d9c9;
+}
+
+.student-top{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.avatar{
+  width:64px;height:64px;border-radius:50%;
+  object-fit:cover;background:var(--mint);
+  border:3px solid #d4ebe0;flex-shrink:0;
+}
+.avatar-fallback{
+  display:flex;align-items:center;justify-content:center;
+  font-size:21px;font-weight:800;color:var(--green);
+  background:linear-gradient(135deg,#e8f5ec,#d4ebe0);
+}
+.student-name{font-size:16px;font-weight:800;overflow-wrap:anywhere}
+.student-code{font-size:11.5px;color:var(--muted);margin-top:3px;font-weight:600}
+
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 12px}
+.tag{
+  font-size:10px;font-weight:700;padding:4px 10px;
+  border-radius:30px;background:var(--mint);color:var(--green);
+  letter-spacing:.3px;text-transform:uppercase;
+}
+.tag.reg-es{background:#d1fae5;color:#065f46}
+.tag.reg-ext{background:#fef3c7;color:#92400e}
+.tag.consent-yes{background:#d1fae5;color:#065f46}
+.tag.consent-no{background:#fee2e2;color:#991b1b}
+.tag.mode-batch{background:#e0e7ff;color:#3730a3}
+.tag.mode-one{background:#fce7f3;color:#9d174d}
+
+.card-info{
+  border-top:1px solid #e6f0ea;padding-top:12px;
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;
+}
+.info-label{
+  font-size:9.5px;color:var(--muted);display:block;
+  margin-bottom:3px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;
+}
+.info-value{font-size:12.5px;font-weight:700;overflow-wrap:anywhere;color:#1b3a2a}
+
+.benefit-area{margin-top:4px;flex:1}
+.benefit-title{
+  font-size:9.5px;color:var(--muted);font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px;
+}
+.benefits{display:flex;gap:5px;flex-wrap:wrap}
+.benefit{
+  background:#e5f6ed;color:#0f5e3a;border-radius:6px;
+  padding:4px 9px;font-size:10.5px;font-weight:700;
+}
+.no-benefit{font-size:11px;color:#9db0a5;font-style:italic}
+
+.empty{
+  grid-column:1/-1;text-align:center;padding:56px 24px;
+  background:#fff;border:1.5px dashed var(--border);
+  border-radius:var(--radius-md);color:var(--muted);
+}
+.empty strong{display:block;color:var(--green);font-size:18px;margin-bottom:6px;font-weight:800}
+.empty p{font-size:13px}
+
+.footer{
+  text-align:center;padding:28px 20px 12px;
+  color:var(--muted);font-size:11.5px;font-weight:500;
+  border-top:1px solid var(--border);margin-top:40px;
+}
+.footer span{color:var(--green2);font-weight:700}
+.footer .copy{display:block;margin-top:4px;font-size:10.5px;color:#8daa9b}
+
+@media(max-width:1024px){
+  .student-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:680px){
+  .container{padding:20px 4% 40px}
+  .stats{grid-template-columns:1fr 1fr;gap:10px}
+  .stat strong{font-size:24px}
+  .student-grid{grid-template-columns:1fr}
+  .toolbar input{max-width:none}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="logo.png" alt="English Spur Logo" onerror="this.style.display='none'">
+    <div>
+      <h1>ENGLISH SPUR</h1>
+      <p>Student Benefits &amp; Profile Directory</p>
+    </div>
+  </div>
+  <button class="btn-outline" onclick="resetFilters()">Reset Filters</button>
+</header>
+
+<main class="container">
+
+  <section class="intro">
+    <div>
+      <h2>Student Benefits Directory</h2>
+      <p>Search by student name, student code, course, or batch to view assigned benefits.</p>
+    </div>
+    <div class="live-pill">● Live Synced</div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><small>Total Students</small><strong id="totalCount">0</strong><span>All listed learners</span></div>
+    <div class="stat"><small>ES Registered</small><strong id="registeredCount">0</strong><span>English Spur students</span></div>
+    <div class="stat"><small>Consent Verified</small><strong id="verifiedCount">0</strong><span>Verified profiles</span></div>
+    <div class="stat"><small>Active Batches</small><strong id="batchCount">0</strong><span>Unique batches</span></div>
+  </section>
+
+  <section class="toolbar">
+    <input id="searchInput" placeholder="Search name, code, course or batch..." oninput="renderPortal()">
+    <select id="registrationFilter" onchange="renderPortal()">
+      <option value="">All Registration Types</option>
+      <option value="ES Registered">ES Registered</option>
+      <option value="External">External</option>
+    </select>
+    <select id="consentFilter" onchange="renderPortal()">
+      <option value="">All Consent Status</option>
+      <option value="yes">Verified</option>
+      <option value="no">Pending</option>
+    </select>
+    <select id="modeFilter" onchange="renderPortal()">
+      <option value="">All Learning Modes</option>
+      <option value="Batch">Batch</option>
+      <option value="One-to-One">One-to-One</option>
+    </select>
+    <select id="batchFilter" onchange="renderPortal()">
+      <option value="">All Batches</option>
+    </select>
+  </section>
+
+  <div class="section-head">
+    <h3>Student Profiles</h3>
+    <span id="resultCount">0 students</span>
+  </div>
+
+  <section class="student-grid" id="studentGrid">
+    <div class="empty"><strong>Loading student directory...</strong><p>Please wait while live records load.</p></div>
+  </section>
+
+  <div class="footer">
+    English Spur Online Training Academy · Student Benefits Directory<br>
+    <span>Made by Sovan Kapri</span>
+    <span class="copy">© 2026 English Spur · All rights reserved.</span>
+  </div>
+
+</main>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB_XBFeLdyf-fPZcGLCvVkwyj27WGSb3K8",
+  authDomain: "stdt-bafde.firebaseapp.com",
+  projectId: "stdt-bafde",
+  storageBucket: "stdt-bafde.firebasestorage.app",
+  messagingSenderId: "545677707188",
+  appId: "1:545677707188:web:79f965d53a62fc1ed994e1"
+};
+
+const COLLECTION_NAME = "englishSpurStudents";
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let publicStudents = [];
+
+function escapeHTML(value){
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  })[ch]);
+}
+
+function initials(name){
+  return (name || "S").trim().split(/\s+/).slice(0,2).map(x => x[0] || "").join("").toUpperCase();
+}
+
+function populateBatchFilter(){
+  const select = document.getElementById("batchFilter");
+  const prev = select.value;
+  const batches = [...new Set(publicStudents.map(s => s.batch).filter(Boolean))].sort();
+  select.innerHTML = '<option value="">All Batches</option>' +
+    batches.map(b => `<option value="${escapeHTML(b)}">${escapeHTML(b)}</option>`).join("");
+  if(prev && batches.includes(prev)) select.value = prev;
+}
+
+window.resetFilters = function(){
+  document.getElementById("searchInput").value = "";
+  document.getElementById("registrationFilter").value = "";
+  document.getElementById("consentFilter").value = "";
+  document.getElementById("modeFilter").value = "";
+  document.getElementById("batchFilter").value = "";
+  renderPortal();
+};
+
+window.renderPortal = function(){
+  const uniqueBatches = new Set(publicStudents.map(s => s.batch).filter(Boolean));
+  document.getElementById("totalCount").textContent = publicStudents.length;
+  document.getElementById("registeredCount").textContent = publicStudents.filter(s => s.registration === "ES Registered").length;
+  document.getElementById("verifiedCount").textContent = publicStudents.filter(s => s.consent === "yes").length;
+  document.getElementById("batchCount").textContent = uniqueBatches.size;
+
+  const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  const reg = document.getElementById("registrationFilter").value;
+  const consent = document.getElementById("consentFilter").value;
+  const mode = document.getElementById("modeFilter").value;
+  const batch = document.getElementById("batchFilter").value;
+
+  const filtered = publicStudents.filter(s => {
+    const hay = [s.name, s.code, s.course, s.batch].join(" ").toLowerCase();
+    return (!q || hay.includes(q)) &&
+      (!reg || s.registration === reg) &&
+      (!consent || s.consent === consent) &&
+      (!mode || s.mode === mode) &&
+      (!batch || s.batch === batch);
+  });
+
+  document.getElementById("resultCount").textContent = filtered.length + " students";
+  const grid = document.getElementById("studentGrid");
+
+  if(!filtered.length){
+    grid.innerHTML = `<div class="empty">
+      <strong>No student records found.</strong>
+      <p>Try clearing your search or changing the filters.</p>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(s => {
+    const consentTag = s.consent === "yes"
+      ? '<span class="tag consent-yes">Consent Verified</span>'
+      : '<span class="tag consent-no">Consent Pending</span>';
+    const regTag = s.registration === "External"
+      ? '<span class="tag reg-ext">External</span>'
+      : '<span class="tag reg-es">ES Registered</span>';
+    const modeTag = s.mode === "One-to-One"
+      ? '<span class="tag mode-one">One-to-One</span>'
+      : '<span class="tag mode-batch">Batch</span>';
+    const benefitsHTML = (s.benefits || []).length
+      ? (s.benefits || []).map(b => `<span class="benefit">${escapeHTML(b)}</span>`).join("")
+      : '<span class="no-benefit">No benefits assigned yet</span>';
+    const avatarHTML = s.photo
+      ? `<img class="avatar" src="${s.photo}" alt="Profile photo">`
+      : `<div class="avatar avatar-fallback">${escapeHTML(initials(s.name))}</div>`;
+
+    return `
+      <article class="student-card">
+        <div class="student-top">
+          ${avatarHTML}
+          <div style="min-width:0">
+            <div class="student-name">${escapeHTML(s.name)}</div>
+            <div class="student-code">${escapeHTML(s.code || "")}</div>
+          </div>
+        </div>
+        <div class="tags">${regTag}${consentTag}${modeTag}</div>
+        <div class="card-info">
+          <div><span class="info-label">Course</span><span class="info-value">${escapeHTML(s.course || "Not specified")}</span></div>
+          <div><span class="info-label">Batch / Group</span><span class="info-value">${escapeHTML(s.batch || "Not specified")}</span></div>
+          <div><span class="info-label">Registration</span><span class="info-value">${escapeHTML(s.registration || "ES Registered")}</span></div>
+          <div><span class="info-label">Consent</span><span class="info-value">${s.consent === "yes" ? "Verified" : "Pending"}</span></div>
+        </div>
+        <div class="benefit-area">
+          <div class="benefit-title">Assigned Student Benefits</div>
+          <div class="benefits">${benefitsHTML}</div>
+        </div>
+      </article>
+    `;
+  }).join("");
+};
+
+onSnapshot(collection(db, COLLECTION_NAME), (snapshot) => {
+  publicStudents = snapshot.docs.map(d => ({ ...d.data(), id: d.data()?.id || d.id }));
+  populateBatchFilter();
+  renderPortal();
+}, (err) => {
+  console.error(err);
+  document.getElementById("studentGrid").innerHTML = `<div class="empty">
+    <strong>Unable to load student records.</strong>
+    <p>Please check your Cloud Firestore configuration and security rules.</p>
+  </div>`;
+});
+</script>
+</body>
+</html>
