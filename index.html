@@ -66,9 +66,42 @@ button{cursor:pointer;border:none}
   font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;
   color:#a8d5c0;margin-top:2px;font-weight:600;
 }
+
+.topbar-right{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.datetime-box{
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.2);
+  padding:7px 14px;
+  border-radius:var(--radius-sm);
+  text-align:right;
+  backdrop-filter:blur(6px);
+}
+.datetime-box .live-time{
+  font-size:13.5px;
+  font-weight:800;
+  color:#ffffff;
+  letter-spacing:.4px;
+  font-variant-numeric:tabular-nums;
+}
+.datetime-box .live-date{
+  font-size:10.5px;
+  color:#bce3d0;
+  font-weight:600;
+}
+
 .btn-outline{
   background:#fff;border:1.5px solid rgba(255,255,255,.35);color:var(--green);
   border-radius:var(--radius-sm);padding:9px 16px;font-weight:700;font-size:12.5px;
+  transition:0.2s;
+}
+.btn-outline:hover{
+  background:#e2f0e9;
 }
 
 .container{max-width:1440px;margin:0 auto;padding:28px 5% 60px}
@@ -141,36 +174,114 @@ button{cursor:pointer;border:none}
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
   gap:20px;
 }
+
+/* Base Student Card with Dynamic CSS Variables */
 .student-card{
-  background:#fff;border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:20px;
-  box-shadow:var(--shadow-sm);transition:.22s;
-  display:flex;flex-direction:column;min-width:0;
-  position:relative;overflow:hidden;
+  --card-accent: #1c6b4a;
+  --card-accent-light: #e2f0e9;
+  --card-bg: #ffffff;
+  --card-border: #d0e4d9;
+
+  background:var(--card-bg);
+  border:1.5px solid var(--card-border);
+  border-radius:var(--radius-lg);
+  padding:20px;
+  box-shadow:var(--shadow-sm);
+  transition:.25s ease;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  position:relative;
+  overflow:hidden;
 }
 .student-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:4px;
-  background:linear-gradient(to right,var(--green2),var(--green3));
-  opacity:0;transition:.2s;
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:var(--card-accent);
+  opacity:.95;
 }
-.student-card:hover::before{opacity:1}
 .student-card:hover{
-  box-shadow:var(--shadow-md);transform:translateY(-3px);
-  border-color:#b8d9c9;
+  box-shadow:var(--shadow-md);
+  transform:translateY(-4px);
+  border-color:var(--card-accent);
 }
 
-.student-top{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+/* Batch-Wise Color Themes */
+.batch-theme-0 {
+  --card-accent: #059669;
+  --card-accent-light: #d1fae5;
+  --card-bg: linear-gradient(180deg, #f4fbf8 0%, #ffffff 32%);
+  --card-border: #bce3d2;
+}
+.batch-theme-1 {
+  --card-accent: #0284c7;
+  --card-accent-light: #e0f2fe;
+  --card-bg: linear-gradient(180deg, #f2f9fe 0%, #ffffff 32%);
+  --card-border: #bae6fd;
+}
+.batch-theme-2 {
+  --card-accent: #d97706;
+  --card-accent-light: #fef3c7;
+  --card-bg: linear-gradient(180deg, #fffbeb 0%, #ffffff 32%);
+  --card-border: #fde68a;
+}
+.batch-theme-3 {
+  --card-accent: #0d9488;
+  --card-accent-light: #ccfbf1;
+  --card-bg: linear-gradient(180deg, #f0fdfa 0%, #ffffff 32%);
+  --card-border: #99f6e4;
+}
+.batch-theme-4 {
+  --card-accent: #4f46e5;
+  --card-accent-light: #e0e7ff;
+  --card-bg: linear-gradient(180deg, #f4f5ff 0%, #ffffff 32%);
+  --card-border: #c7d2fe;
+}
+.batch-theme-5 {
+  --card-accent: #e11d48;
+  --card-accent-light: #ffe4e6;
+  --card-bg: linear-gradient(180deg, #fff5f6 0%, #ffffff 32%);
+  --card-border: #fecdd3;
+}
+
+/* Dedicated Premium Style for One-to-One Students */
+.student-card.card-one-to-one {
+  --card-accent: #7e22ce;
+  --card-accent-light: #f3e8ff;
+  --card-bg: linear-gradient(145deg, #faf5ff 0%, #ffffff 55%, #fdf4ff 100%);
+  --card-border: #d8b4fe;
+  box-shadow: 0 6px 22px rgba(126, 34, 206, 0.08);
+}
+.student-card.card-one-to-one::before {
+  height: 6px;
+  background: linear-gradient(90deg, #6b21a8, #a855f7, #f59e0b);
+}
+.student-card.card-one-to-one::after {
+  content: '★ VIP 1:1';
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: linear-gradient(135deg, #6b21a8, #9333ea);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(107, 33, 168, 0.25);
+}
+
+.student-top{display:flex;gap:14px;align-items:center;margin-bottom:12px;padding-right:55px}
 .avatar{
   width:64px;height:64px;border-radius:50%;
-  object-fit:cover;background:var(--mint);
-  border:3px solid #d4ebe0;flex-shrink:0;
+  object-fit:cover;background:var(--card-accent-light);
+  border:3px solid var(--card-accent);flex-shrink:0;
 }
 .avatar-fallback{
   display:flex;align-items:center;justify-content:center;
-  font-size:21px;font-weight:800;color:var(--green);
-  background:linear-gradient(135deg,#e8f5ec,#d4ebe0);
+  font-size:21px;font-weight:800;color:var(--card-accent);
+  background:var(--card-accent-light);
 }
-.student-name{font-size:16px;font-weight:800;overflow-wrap:anywhere}
+.student-name{font-size:16px;font-weight:800;overflow-wrap:anywhere;color:var(--text)}
 .student-code{font-size:11.5px;color:var(--muted);margin-top:3px;font-weight:600}
 
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 12px}
@@ -183,11 +294,11 @@ button{cursor:pointer;border:none}
 .tag.reg-ext{background:#fef3c7;color:#92400e}
 .tag.consent-yes{background:#d1fae5;color:#065f46}
 .tag.consent-no{background:#fee2e2;color:#991b1b}
-.tag.mode-batch{background:#e0e7ff;color:#3730a3}
-.tag.mode-one{background:#fce7f3;color:#9d174d}
+.tag.mode-batch{background:var(--card-accent-light);color:var(--card-accent);border:1px solid var(--card-border)}
+.tag.mode-one{background:linear-gradient(135deg,#f3e8ff,#fae8ff);color:#6b21a8;border:1px solid #d8b4fe}
 
 .card-info{
-  border-top:1px solid #e6f0ea;padding-top:12px;
+  border-top:1px solid var(--card-border);padding-top:12px;
   display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;
 }
 .info-label{
@@ -195,6 +306,14 @@ button{cursor:pointer;border:none}
   margin-bottom:3px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;
 }
 .info-value{font-size:12.5px;font-weight:700;overflow-wrap:anywhere;color:#1b3a2a}
+.batch-pill-text{
+  display:inline-block;
+  background:var(--card-accent-light);
+  color:var(--card-accent);
+  padding:2px 8px;
+  border-radius:6px;
+  font-size:11.5px;
+}
 
 .benefit-area{margin-top:4px;flex:1}
 .benefit-title{
@@ -203,7 +322,7 @@ button{cursor:pointer;border:none}
 }
 .benefits{display:flex;gap:5px;flex-wrap:wrap}
 .benefit{
-  background:#e5f6ed;color:#0f5e3a;border-radius:6px;
+  background:var(--card-accent-light);color:var(--card-accent);border-radius:6px;
   padding:4px 9px;font-size:10.5px;font-weight:700;
 }
 .no-benefit{font-size:11px;color:#9db0a5;font-style:italic}
@@ -233,6 +352,7 @@ button{cursor:pointer;border:none}
   .stat strong{font-size:24px}
   .student-grid{grid-template-columns:1fr}
   .toolbar input{max-width:none}
+  .datetime-box{text-align:left}
 }
 </style>
 </head>
@@ -247,7 +367,13 @@ button{cursor:pointer;border:none}
       <p>Current Student Directory</p>
     </div>
   </div>
-  <button class="btn-outline" onclick="resetFilters()">Reset Filters</button>
+  <div class="topbar-right">
+    <div class="datetime-box" id="liveDateTimeBox">
+      <div class="live-time" id="liveClock">--:--:-- --</div>
+      <div class="live-date" id="liveDate">Loading date...</div>
+    </div>
+    <button class="btn-outline" onclick="resetFilters()">Reset Filters</button>
+  </div>
 </header>
 
 <main class="container">
@@ -325,6 +451,21 @@ const db = getFirestore(app);
 
 let publicStudents = [];
 
+/* Live Date & Time Updater */
+function updateDateTime() {
+  const now = new Date();
+  const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+  const dateOptions = { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' };
+  
+  const timeEl = document.getElementById("liveClock");
+  const dateEl = document.getElementById("liveDate");
+  
+  if (timeEl) timeEl.textContent = now.toLocaleTimeString('en-IN', timeOptions);
+  if (dateEl) dateEl.textContent = now.toLocaleDateString('en-IN', dateOptions);
+}
+updateDateTime();
+setInterval(updateDateTime, 1000);
+
 function escapeHTML(value){
   return String(value ?? "").replace(/[&<>"']/g, ch => ({
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
@@ -333,6 +474,18 @@ function escapeHTML(value){
 
 function initials(name){
   return (name || "S").trim().split(/\s+/).slice(0,2).map(x => x[0] || "").join("").toUpperCase();
+}
+
+/* Assign consistent theme class based on Batch name */
+function getBatchThemeClass(batchName) {
+  if (!batchName) return "batch-theme-0";
+  let hash = 0;
+  const str = String(batchName).trim().toLowerCase();
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const themeIndex = Math.abs(hash) % 6;
+  return `batch-theme-${themeIndex}`;
 }
 
 function populateBatchFilter(){
@@ -387,13 +540,16 @@ window.renderPortal = function(){
   }
 
   grid.innerHTML = filtered.map(s => {
+    const isOneToOne = s.mode === "One-to-One";
+    const cardStyleClass = isOneToOne ? "card-one-to-one" : getBatchThemeClass(s.batch);
+
     const consentTag = s.consent === "yes"
       ? '<span class="tag consent-yes">Consent Verified</span>'
       : '<span class="tag consent-no">Consent Pending</span>';
     const regTag = s.registration === "External"
       ? '<span class="tag reg-ext">External</span>'
       : '<span class="tag reg-es">ES Registered</span>';
-    const modeTag = s.mode === "One-to-One"
+    const modeTag = isOneToOne
       ? '<span class="tag mode-one">One-to-One</span>'
       : '<span class="tag mode-batch">Batch</span>';
     const benefitsHTML = (s.benefits || []).length
@@ -404,7 +560,7 @@ window.renderPortal = function(){
       : `<div class="avatar avatar-fallback">${escapeHTML(initials(s.name))}</div>`;
 
     return `
-      <article class="student-card">
+      <article class="student-card ${cardStyleClass}">
         <div class="student-top">
           ${avatarHTML}
           <div style="min-width:0">
@@ -415,7 +571,7 @@ window.renderPortal = function(){
         <div class="tags">${regTag}${consentTag}${modeTag}</div>
         <div class="card-info">
           <div><span class="info-label">Course</span><span class="info-value">${escapeHTML(s.course || "Not specified")}</span></div>
-          <div><span class="info-label">Batch / Group</span><span class="info-value">${escapeHTML(s.batch || "Not specified")}</span></div>
+          <div><span class="info-label">Batch / Group</span><span class="info-value"><span class="batch-pill-text">${escapeHTML(s.batch || "Not specified")}</span></span></div>
           <div><span class="info-label">Registration</span><span class="info-value">${escapeHTML(s.registration || "ES Registered")}</span></div>
           <div><span class="info-label">Consent</span><span class="info-value">${s.consent === "yes" ? "Verified" : "Pending"}</span></div>
         </div>
