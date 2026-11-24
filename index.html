@@ -449,6 +449,7 @@ const COLLECTION_NAME = "englishSpurStudents";
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+let allStudents = [];
 let publicStudents = [];
 
 /* Live Date & Time Updater */
@@ -456,10 +457,10 @@ function updateDateTime() {
   const now = new Date();
   const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
   const dateOptions = { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' };
-  
+
   const timeEl = document.getElementById("liveClock");
   const dateEl = document.getElementById("liveDate");
-  
+
   if (timeEl) timeEl.textContent = now.toLocaleTimeString('en-IN', timeOptions);
   if (dateEl) dateEl.textContent = now.toLocaleDateString('en-IN', dateOptions);
 }
@@ -596,7 +597,8 @@ window.renderPortal = function(){
 };
 
 onSnapshot(collection(db, COLLECTION_NAME), (snapshot) => {
-  publicStudents = snapshot.docs.map(d => ({ ...d.data(), id: d.data()?.id || d.id }));
+  allStudents = snapshot.docs.map(d => ({ ...d.data(), id: d.data()?.id || d.id }));
+  publicStudents = allStudents.filter(s => s.visibility !== "hide");
   populateBatchFilter();
   renderPortal();
 }, (err) => {
